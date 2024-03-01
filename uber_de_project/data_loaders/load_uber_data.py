@@ -14,8 +14,10 @@ def load_data_from_api(*args, **kwargs):
     """
     url = 'https://storage.googleapis.com/uber-data-engineering-project-yash07/uber_data.csv'
     response = requests.get(url)
+    df = pd.read_csv(io.StringIO(response.text), sep=',')
+    df.to_csv('uber.csv')
 
-    return pd.read_csv(io.StringIO(response.text), sep=',')
+    return df
 
 
 @test
